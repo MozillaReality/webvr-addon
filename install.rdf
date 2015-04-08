@@ -13,9 +13,17 @@
     <type>2</type>
 
     <targetApplication>
+      <!-- Desktop -->
       <r:Description>
         <id>{ec8030f7-c20a-464f-9b0e-13a3a9e97384}</id>
         <minVersion>30.0a1</minVersion>
+        <maxVersion>40.0.*</maxVersion>
+      </r:Description>
+
+      <!-- Android -->
+      <r:Description>
+        <id>{aa3c5121-dab2-40e2-81ca-7ea25febc110}</id>
+        <minVersion>40.0.0</minVersion>
         <maxVersion>40.0.*</maxVersion>
       </r:Description>
     </targetApplication>
