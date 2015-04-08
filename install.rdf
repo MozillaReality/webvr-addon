@@ -6,7 +6,7 @@
     <name>Mozilla WebVR Enabler</name>
     <description>Enables WebVR support in recent Firefox Nightly builds, avoiding the need to make about:config changes.</description>
     <version>0.1.0</version>
-    <homepageURL>http://mozvr.com/webvr-addon</homepageURL>
+    <homepageURL>http://mozvr.com/downloads</homepageURL>
     <id>webvr-addon@mozvr.com</id>
 
     <bootstrap>true</bootstrap>
