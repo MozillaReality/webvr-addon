@@ -1,0 +1,13 @@
+{
+  "title": "Mozilla WebVR Enabler",
+  "name": "mozillawebvrenabler",
+  "version": "0.2.0",
+  "description": "Enables WebVR support in recent Firefox Nightly builds, avoiding the need to make about:config changes.",
+  "main": "bootstrap.js",
+  "author": "Mozilla",
+  "engines": {
+    "firefox": ">=38.0a1",
+    "fennec": ">=38.0a1"
+  },
+  "license": "MPL2"
+}
