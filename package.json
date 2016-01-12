@@ -9,5 +9,14 @@
     "firefox": ">=38.0a1",
     "fennec": ">=38.0a1"
   },
-  "license": "MPL2"
+  "license": "MPL2",
+  "devDependencies": {
+    "jpm": "^1.0.4"
+  },
+  "scripts": {
+    "start": "npm run build && npm run run",
+    "build": "jpm build",
+    "run": "jpm run",
+    "xpi": "jpm xpi"
+  }
 }
