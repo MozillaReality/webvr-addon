@@ -4,42 +4,52 @@
 
 Components.utils.import("resource://gre/modules/Services.jsm");
 
-function startup(data, reason)
-{
-  Services.prefs.setBoolPref("dom.vr.enabled", true);
-}
+const PREFS = {
+  // Enables WebVR. Not needed for Nightly, but we need to keep for other versions.
+  "dom.vr.enabled": true,
 
-function shutdown(data, reason)
-{
-  Services.prefs.setBoolPref("dom.vr.enabled", false);
-}
+  // Disables e10s (multi-process in Nightly).
+  "browser.tabs.remote.autostart.2": false,
 
-function install(data, reason)
-{
-  const Cc = Components.classes, Ci = Components.interfaces;
+  // Enables pose prediction (for Nightly).
+  "dom.vr.poseprediction.enabled": true,
 
-  var isAlreadyEnabled = Services.prefs.getBoolPref("dom.vr.enabled", false);
-  if (isAlreadyEnabled)
-    return;
+  // Improves frame rate for Oculus DK2 but will break things for HMDs that
+  // run at other refresh rates (e.g, 60, 90).
+  "layout.frame_rate": 75,
 
-  var title = "Restart Required";
-  var msg = "Installing the WebVR Add-On for the first time requires a restart.  Restart now?";
-  let shouldProceed = Services.prompt.confirm(null, title, msg);
-  if (shouldProceed) {
-    let cancelQuit = Cc["@mozilla.org/supports-PRBool;1"]
-                     .createInstance(Ci.nsISupportsPRBool);
-    Services.obs.notifyObservers(cancelQuit, "quit-application-requested",
-                                 "restart");
-    shouldProceed = !cancelQuit.data;
+  // Enable mirroring. It's confusing otherwise, if you're not looking at your Rift.
+  "gfx.vr.mirror-textures": true
+};
 
-    if (shouldProceed) {
-      Services.prefs.setBoolPref("dom.vr.enabled", true);
-      Services.startup.quit(Ci.nsIAppStartup.eAttemptQuit |  Ci.nsIAppStartup.eRestart);
+function setDefaultPrefs () {
+  let branch = Services.prefs.getDefaultBranch(null);
+  for (let [key, val] in Iterator(PREFS)) {
+    switch (typeof val) {
+      case "boolean":
+        branch.setBoolPref(key, val);
+        break;
+      case "number":
+        branch.setIntPref(key, val);
+        break;
+      case "string":
+        branch.setCharPref(key, val);
+        break;
     }
   }
 }
 
-function uninstall(data, reason)
-{
-  Services.prefs.setBoolPref("dom.vr.enabled", false);
+function startup (data, reason) {
+  setDefaultPrefs();
+}
+
+function shutdown (data, reason) {
+}
+
+function install (data, reason) {
+  startup(data, reason);
+}
+
+function uninstall (data, reason) {
+  // Prefs will be reverted automatically upon browser restart.
 }
