@@ -7,18 +7,24 @@ The latest public version of this extension lives on __[addons.mozilla.org](http
 
 ## Development
 
-We use [jpm](https://developer.mozilla.org/en-US/Add-ons/SDK/Tools/jpm).
+We use [jpm](https://developer.mozilla.org/en-US/Add-ons/SDK/Tools/jpm), which requires npm (`brew install npm`, if you're on OS X).
+
+Then to install the dependencies:
+
+```bash
+npm install
+```
 
 ### Building
 
 ```bash
-jpm xpi
+npm run xpi
 ```
 
 ### Running
 
 ```bash
-jpm run
+npm run run
 ```
 
 ### Publishing
@@ -26,7 +32,7 @@ jpm run
 To update this [extension](https://addons.mozilla.org/en-US/firefox/addon/mozilla-webvr-enabler/), first run this command:
 
 ```bash
-jpm xpi
+npm run xpi
 ```
 
 And then [upload the new version to the AMO](https://addons.mozilla.org/developers/addon/mozilla-webvr-enabler/versions).
