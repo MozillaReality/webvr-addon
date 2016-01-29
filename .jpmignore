@@ -1,4 +1,9 @@
+*.log
+*.xpi
+*.zip
+*~
 .DS_Store
+.git
 .gitignore
 .jpmignore
 README.md
