@@ -1,6 +1,6 @@
 {
   "title": "Mozilla WebVR Plus",
-  "name": "mozillawebvrenabler",
+  "name": "mozillawebvrplus",
   "version": "0.3.0",
   "description": "Firefox extension that manages browser prefs for optimal WebVR support, avoiding the need to make about:config changes.",
   "main": "index.js",

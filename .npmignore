@@ -7,5 +7,4 @@
 .gitignore
 .jpmignore
 .npmignore
-README.md
 node_modules
