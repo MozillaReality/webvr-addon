@@ -1,6 +1,6 @@
-# Mozilla WebVR Enabler
+# Mozilla WebVR Plus
 
-Enables WebVR support in recent Firefox Nightly builds, avoiding the need to make `about:config` changes.
+Firefox extension that manages browser prefs for optimal WebVR support, avoiding the need to make about:config changes.
 
 The latest public version of this extension lives on __[addons.mozilla.org](https://addons.mozilla.org/en-US/firefox/addon/mozilla-webvr-enabler/)__.
 
