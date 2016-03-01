@@ -29,13 +29,13 @@ const PREFS = {
 };
 
 function setDefaultPrefs () {
-  Object.keys(PREFS, function (key) {
+  Object.keys(PREFS).forEach(function (key) {
     service.set(key, PREFS[key]);
   });
 }
 
 function revertPrefs () {
-  Object.keys(PREFS, function (key) {
+  Object.keys(PREFS).forEach(function (key) {
     service.reset(key);
   });
 }
