@@ -1,7 +1,7 @@
 {
   "title": "Mozilla WebVR Plus",
   "name": "mozillawebvrenabler",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "Firefox extension that manages browser prefs for optimal WebVR support, avoiding the need to make about:config changes.",
   "main": "index.js",
   "author": "Mozilla",
@@ -9,7 +9,7 @@
     "firefox": ">=38.0a1",
     "fennec": ">=38.0a1"
   },
-  "license": "MPL2",
+  "license": "MIT",
   "devDependencies": {
     "jpm": "^1.0.4"
   },
