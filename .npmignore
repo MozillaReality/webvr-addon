@@ -7,4 +7,5 @@
 .gitignore
 .jpmignore
 .npmignore
+@*
 node_modules
