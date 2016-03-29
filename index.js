@@ -1,8 +1,11 @@
 /* global require, exports */
 
+const { Cc, Ci, Cu, Cm } = require('chrome');
 const { PageMod } = require('sdk/page-mod');
 const self = require('sdk/self');
-const service = require('sdk/preferences/service');
+const prefs = require('sdk/preferences/service');
+
+Cu.import('resource://gre/modules/Services.jsm');
 
 const pkg = require('./package.json');
 
@@ -18,7 +21,7 @@ const PREFS = {
 
   // Improves frame rate for Oculus DK2 but will break things for HMDs that
   // run at other refresh rates (e.g, 60, 90).
-  'layout.frame_rate': 75,
+  'layout.frame_rate': 0,
 
   // Increases animation preformance.
   'layout.frame_rate.precise': true,
@@ -28,14 +31,32 @@ const PREFS = {
 };
 
 function setDefaultPrefs () {
+  var needsReset = false;
+
   Object.keys(PREFS).forEach(function (key) {
-    service.set(key, PREFS[key]);
+    if (prefs.get(key) === PREFS[key]) { return; }
+    prefs.set(key, PREFS[key]);
+    needsReset = true;
   });
+
+  if (!needsReset) { return; }
+
+  var title = 'Restart Required';
+  var msg = 'Installing the WebVR Plus add-on for the first time requires a restart. Restart now?';
+  let shouldProceed = Services.prompt.confirm(null, title, msg);
+  if (!shouldProceed) { return; }
+
+  let cancelQuit = Cc['@mozilla.org/supports-PRBool;1'].createInstance(Ci.nsISupportsPRBool);
+  Services.obs.notifyObservers(cancelQuit, 'quit-application-requested', 'restart');
+  shouldProceed = !cancelQuit.data;
+  if (!shouldProceed) { return; }
+
+  Services.startup.quit(Ci.nsIAppStartup.eAttemptQuit |  Ci.nsIAppStartup.eRestart);
 }
 
 function revertPrefs () {
   Object.keys(PREFS).forEach(function (key) {
-    service.reset(key);
+    prefs.reset(key);
   });
 }
 
@@ -62,7 +83,13 @@ PageMod({
 });
 
 // Covers startup, install, upgrade, downgrade, enable.
-exports.main = setDefaultPrefs;
+exports.main = function (opts) {
+  if (opts.loadReason === 'startup') { return; }
+  setDefaultPrefs();
+};
 
 // Covers uninstall, disable, shutdown, downgrade, upgrade.
-exports.onUnload = revertPrefs;
+exports.onUnload = function (reason) {
+  if (reason === 'shutdown') { return; }
+  revertPrefs();
+};
