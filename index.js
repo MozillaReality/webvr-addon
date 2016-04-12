@@ -20,7 +20,10 @@ const PREFS = {
   // run at other refresh rates (e.g, 60, 90).
   'layout.frame_rate': 75,
 
-  // Enable mirroring. It's confusing otherwise, if you're not looking at your Rift.
+  // Increases animation preformance.
+  'layout.frame_rate.precise': true,
+
+  // Enables mirroring. It's confusing otherwise, if you're not looking at your Rift.
   'gfx.vr.mirror-textures': true
 };
 
