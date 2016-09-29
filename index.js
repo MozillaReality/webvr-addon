@@ -13,20 +13,10 @@ const PREFS = {
   // Enables WebVR. Not needed for Nightly, but we need to keep for other versions.
   'dom.vr.enabled': true,
 
-  // Disables e10s (multi-process in Nightly).
-  'browser.tabs.remote.autostart.2': false,
+  // Enables the OpenVR API (e.g., Steam VR).
+  'dom.vr.openvr.enabled': true,
 
-  // Enables pose prediction (for Nightly).
-  'dom.vr.poseprediction.enabled': true,
-
-  // Improves frame rate for Oculus DK2 but will break things for HMDs that
-  // run at other refresh rates (e.g, 60, 90).
-  'layout.frame_rate': 0,
-
-  // Increases animation preformance.
-  'layout.frame_rate.precise': true,
-
-  // Enables mirroring. It's confusing otherwise, if you're not looking at your Rift.
+  // Enables mirroring. It's confusing otherwise, if you're not looking at your headset.
   'gfx.vr.mirror-textures': true
 };
 
